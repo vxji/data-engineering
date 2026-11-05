@@ -1,5 +1,5 @@
 # Open Data Contract Standard (ODCS) v3.1: the payment provider's feed, as agreed with Qafila.
-# Lab 4.2 builds and validates this contract; capstone/pipeline.py runs its quality rules as an asset check.
+# capstone/pipeline.py runs these rules as a blocking asset check. A rule blocks unless it says onFail: quarantine.
 apiVersion: v3.1.0
 kind: DataContract
 id: urn:datacontract:qafila:payments-feed
@@ -39,6 +39,11 @@ schema:
         description: A payment can't be zero or negative; refunds are a status, not a negative amount.
         query: SELECT count(*) FROM {object} WHERE amount <= 0
         mustBe: 0
+        customProperties:
+          - property: onFail
+            value: quarantine      # bad rows go to quarantine.qrn_payments; the run continues
+          - property: maxShare
+            value: 0.01            # above 1% of the feed, this is an incident: block
     properties:
       - name: payment_id
         logicalType: string

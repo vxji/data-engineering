@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: qrn_payments
+    description: "Grain: one row per rejected payment. Owner: payments-provider-integration."
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: owner
+        data_tests: [not_null]
+  - name: qrn_order_items
+    description: "Grain: one row per rejected order line. Owner: finance-operations."
+    columns:
+      - name: order_line_id
+        data_tests: [unique, not_null]
+      - name: owner
+        data_tests: [not_null]
+  - name: qrn_supplier_prices
+    description: "Grain: one row per rejected supplier price. Owner: purchasing."
+    columns:
+      - name: reject_reason
+        data_tests: [not_null]
+      - name: owner
+        data_tests: [not_null]

@@ -1,3 +1,5 @@
+> This fork's project README is at the [repository root](../../README.md). Below is the course's starter kit, kept for reference.
+
 # Capstone starter kit
 
 Teams of 2–3 build a working data platform and present it on Day 5 (10 min talk + live demo, 5 min technical Q&A).

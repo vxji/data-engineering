@@ -18,3 +18,10 @@ labs/dbt_qafila/.user.yml
 notes/
 labs/logs/
 .shots/
+
+# capstone
+labs/capstone/dbt_project/target/
+labs/capstone/dbt_project/logs/
+labs/capstone/dbt_project/dbt_packages/
+labs/capstone/dbt_project/.user.yml
+labs/capstone/.secrets/

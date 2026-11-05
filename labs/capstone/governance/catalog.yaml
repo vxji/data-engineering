@@ -1,0 +1,17 @@
+# Column classification (illustrative Qafila policy using the NDMO levels). This is an engineering
+# artifact, not legal advice: levels and rules belong to the organization and its data protection officer.
+columns:
+  - {location: vault.customers_pii, column: national_id, pii: national ID, level: Secret, protection: Vault only; token in the warehouse, raw_access: Data protection officer}
+  - {location: vault.customers_pii, column: iban, pii: bank account, level: Secret, protection: Vault only; never leaves it, raw_access: Data protection officer}
+  - {location: vault.customers_pii, column: full_name, pii: name, level: Restricted, protection: Vault only; support view, raw_access: Support}
+  - {location: vault.customers_pii, column: email, pii: email, level: Restricted, protection: Vault only; domain in the warehouse, raw_access: Support}
+  - {location: vault.customers_pii, column: mobile, pii: mobile, level: Restricted, protection: Vault only; masked in the support view, raw_access: Nobody by default}
+  - {location: raw.customers, column: person_token, pii: pseudonym, level: Restricted, protection: HMAC-SHA256 with a key outside git, raw_access: Data engineers}
+  - {location: raw.customers, column: email_domain, pii: indirect, level: Restricted, protection: Domain only; left out of analyst views, raw_access: Data engineers}
+  - {location: raw.customers, column: city, pii: indirect, level: Restricted, protection: Personal by association, raw_access: Analysts}
+  - {location: raw.customers, column: district, pii: indirect, level: Restricted, protection: Left out of analyst views, raw_access: Data engineers}
+  - {location: raw.payments, column: card_last4, pii: partial card number, level: Restricted, protection: Stops at staging; not in marts, raw_access: Data engineers}
+  - {location: raw.delivery_events, column: lat, pii: customer location, level: Restricted, protection: Stops at staging; not in marts, raw_access: Data engineers}
+  - {location: raw.delivery_events, column: lon, pii: customer location, level: Restricted, protection: Stops at staging; not in marts, raw_access: Data engineers}
+  - {location: raw.delivery_events, column: courier_id, pii: employee identifier, level: Restricted, protection: Not in analyst views, raw_access: Data engineers}
+  - {location: raw.reviews, column: review_text, pii: free text, level: Restricted, protection: Scanned on every run; not in marts, raw_access: Data engineers}
